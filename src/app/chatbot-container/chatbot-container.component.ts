@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-chatbot-container',
@@ -7,23 +8,47 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatbotContainerComponent implements OnInit {
 
-  constructor() { }
+  @ViewChild('scroll', { static: true }) scroll: any;
 
+  chatForm = new FormGroup({
+    message: new FormControl('', [
+      Validators.maxLength(256)
+    ])
+  });
   textBubbles: textBubble[] = [];
+  
 
   ngOnInit(): void {
-
     this.textBubbles = chatGenerator();
   }
 
+  onSubmit() {
+
+    console.log(this.chatForm);
+    if(this.chatForm.valid) {
+      this.textBubbles.push({
+        direction: 'outbound',
+        text: this.chatForm.value.message ?? "" ,
+        timestamp: new Date()
+      })
+      setTimeout(() => {
+        this.scroll.nativeElement.scrollTo(0, this.scroll.nativeElement.scrollHeight);
+      }, 0);
+    }
+      this.chatForm.reset();
+
+  }
+
 }
+
+
 
 
 let chatGenerator = () => {
   const messages: textBubble[] = [];
     for (let i = 0; i < 15; i++) {
       const direction = i % 2 === 0 ? "inbound" : "outbound";
-      const text = generateRandomText(100);
+      const text = generateRandomText(256);
       const timestamp = generateRandomDate(new Date("2021-01-01"), new Date("2021-12-31"));
       messages.push({ direction, text, timestamp });
     }
@@ -34,7 +59,8 @@ let chatGenerator = () => {
     const characters = "abcdefghijklmnopqrstuvwxyz";
     let result = "";
     let wordLength = 0;
-    while (result.length < length) {
+    const maxCharecters = Math.random() * 256;
+    while (result.length < length - maxCharecters) {
       if (wordLength === 0 || Math.random() < 0.3) {
         if (result.length > 0) {
           result += " ";

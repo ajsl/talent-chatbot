@@ -5,20 +5,21 @@
             <div class="modal-header">
                 <img src="../../assets/robot.svg" class="rounded float-start chatbot-icon" alt="/"/> <h1>AquentBot</h1>
             </div>
-          <ul class="gap-1 my-1 list-unstyled text-container">
+          <ul class="gap-1 my-1 list-unstyled text-container" #scroll>
             <app-text-bubble *ngFor="let bubble of (textBubbles ? textBubbles : [])" [bubble]=bubble></app-text-bubble>
           </ul>
           <footer class="chatbot-footer">
             <!-- <input type="text" id="question-input" placeholder="Reply to AquentBot"/> -->
-            <form class="row g-3">
+            <form class="row g-3 needs-validation" [formGroup]="chatForm" (ngSubmit)="onSubmit()" >
                 <div class="col-auto">
                   <label for="inputQuestion" class="visually-hidden">Password</label>
-                  <input type="text" class="form-control" id="inputQuestion" placeholder="Reply to AquentBot">
+                  <input type="text" class="form-control" id="inputQuestion" formControlName="message" placeholder="Reply to AquentBot" >
+                  <div *ngIf="chatForm.controls['message'].errors?.['maxlength']" class="error-text">max charecters 256</div>
                 </div>
                 <div class="col-auto">
-                  <button type="submit" class="btn btn-primary mb-3">Submit</button>
+                  <button type="submit" class="btn btn-primary mb-3" [disabled]="chatForm.invalid">Submit</button>
                 </div>
-              </form>
+            </form>
         </footer>
         </div>
       </div>
