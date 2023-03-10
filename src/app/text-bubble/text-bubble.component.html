@@ -1,0 +1,12 @@
+<li *ngIf="bubble" class="list-item mx-2 {{containerClass}}">
+    <div class="bubble-container">
+        <div><img class="small-image" src="{{imageUrl}}" alt="/"/>{{displayName}}</div>
+        <div class="bubble alert {{bubbleClass}}">
+            {{text}}
+        </div>
+        <figcaption class="blockquote-footer">
+            {{bubble.timestamp | date:'short'}}
+        </figcaption>
+    </div>
+    
+</li>

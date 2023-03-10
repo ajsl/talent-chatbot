@@ -1,44 +1,35 @@
-.chatbot-container {
-    display: flex;
-    flex-direction: column;
-    max-width: 100%;
-    align-self: center;
-    justify-self: center;
-    align-items: space-between;
-    height: 500px;
-    justify-content: space-between;
-    border-radius: 10px;
-    background-color: white;
-}
-
-.chatbot-header {
-    height: 20%;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    background: rgb(195,54,34);
-    background: linear-gradient(0deg, rgba(195,54,34,1) 0%, rgba(253,187,45,1) 100%);
-    color: white;
-    border-radius: 10px 10px 0 0;
-}
-
 .chatbot-icon {
-    max-height: 70%;
+    max-height: 3em;
     margin: 0 5px;
 }
 
+.modal-header {
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.modal-body {
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
 .chatbot-footer {
     display: flex;
     align-items: center;
+    justify-content: center;
     height: 10%;
-    padding: 0 5px 0 20px;
+    padding: 2em 0 1em 0;
+    margin: 1em 0;
+    border-top: var(--bs-modal-header-border-width) solid var(--bs-modal-header-border-color);
 
-    input {
-        width: 70%;
-        height: 20px;
-    }
 }
 
-:host {
-    width: 20%; 
+.text-container {
+    min-height: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    overflow: scroll;
 }

@@ -1,0 +1,42 @@
+.inbound {
+    display: flex;
+    justify-content: flex-start;
+    --bs-alert-color: #664d03;
+    --bs-alert-bg: #fff3cd;
+    --bs-alert-border-color: #ffecb5;
+}
+
+.outbound {
+    display: flex;
+    justify-content: flex-end;
+    --bs-alert-color: #084298;
+    --bs-alert-bg: #cfe2ff;
+    --bs-alert-border-color: #b6d4fe;
+}
+
+
+.bubble-container {
+    width: 45%;
+}
+.bubble {
+    
+    max-height: 8em;
+    display: flex;
+    align-items: center;
+    padding: 0.5em;
+}
+
+:host {
+    width: 100%;
+}
+
+.small-image {
+    max-height: 1.5em;
+    border: 1px solid grey;
+    border-radius: 1.5em;
+    margin: 0 2px 0 0 ;
+}
+
+.blockquote-footer {
+    font-size: 0.7em;
+}

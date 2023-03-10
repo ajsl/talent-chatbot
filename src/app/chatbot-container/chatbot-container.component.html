@@ -1,12 +1,26 @@
-<section class="chatbot-container">
-    <header class="chatbot-header">
-        <img src="../../assets/robot.svg" class="chatbot-icon" alt="/"/> <h1>AquentBot</h1>
-    </header>
-    <div>
-
+<div class="modal d-block bg-secondary" tabindex="-1" role="dialog" aria-label="chatbot" id="modalTour">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content rounded-4 shadow">
+        <div class="modal-body p-3">
+            <div class="modal-header">
+                <img src="../../assets/robot.svg" class="rounded float-start chatbot-icon" alt="/"/> <h1>AquentBot</h1>
+            </div>
+          <ul class="gap-1 my-1 list-unstyled text-container">
+            <app-text-bubble *ngFor="let bubble of (textBubbles ? textBubbles : [])" [bubble]=bubble></app-text-bubble>
+          </ul>
+          <footer class="chatbot-footer">
+            <!-- <input type="text" id="question-input" placeholder="Reply to AquentBot"/> -->
+            <form class="row g-3">
+                <div class="col-auto">
+                  <label for="inputQuestion" class="visually-hidden">Password</label>
+                  <input type="text" class="form-control" id="inputQuestion" placeholder="Reply to AquentBot">
+                </div>
+                <div class="col-auto">
+                  <button type="submit" class="btn btn-primary mb-3">Submit</button>
+                </div>
+              </form>
+        </footer>
+        </div>
+      </div>
     </div>
-    <footer class="chatbot-footer">
-        <input type="text" id="question-input" placeholder="Reply to AquentBot"/>
-        <button></button>
-    </footer>
-</section>
+  </div>
