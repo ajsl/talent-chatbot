@@ -8,8 +8,18 @@
           <ul class="gap-1 my-1 list-unstyled text-container" #scroll>
             <app-text-bubble *ngFor="let bubble of (textBubbles ? textBubbles : [])" [bubble]=bubble></app-text-bubble>
           </ul>
+          <div *ngIf="showSpinner" class="spinner-container">
+              <div  class="spinner-grow" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <div  class="spinner-grow" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+              <div  class="spinner-grow" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
+          </div>
           <footer class="chatbot-footer">
-            <!-- <input type="text" id="question-input" placeholder="Reply to AquentBot"/> -->
             <form class="row g-3 needs-validation" [formGroup]="chatForm" (ngSubmit)="onSubmit()" >
                 <div class="col-auto">
                   <label for="inputQuestion" class="visually-hidden">Password</label>
@@ -17,7 +27,7 @@
                   <div *ngIf="chatForm.controls['message'].errors?.['maxlength']" class="error-text">max charecters 256</div>
                 </div>
                 <div class="col-auto">
-                  <button type="submit" class="btn btn-primary mb-3" [disabled]="chatForm.invalid">Submit</button>
+                  <button type="submit" class="btn btn-danger mb-3" [disabled]="chatForm.invalid">Submit</button>
                 </div>
             </form>
         </footer>

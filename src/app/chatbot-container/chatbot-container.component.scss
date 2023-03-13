@@ -42,7 +42,29 @@
     width: 100%;
 }
 
-.form-control.ng-invalid  {
+.form-control.ng-invalid.ng-touched  {
     border: 2px solid red;
     box-shadow: none;
+}
+
+.spinner-grow {
+    --bs-spinner-width: 0.5rem;
+    --bs-spinner-height: 0.5rem;
+    margin: 0.2rem;
+}
+
+.spinner-container {
+    display: flex;
+    align-items: stretch;
+    padding: 0 2em;
+}
+
+.btn {
+    background-color: #cd4d10;
+    border: 1px solid #cd4d10;
+
+    // .active {
+    //     background-color: #913409;
+    //     border: 1px solid #913409;
+    // }
 }

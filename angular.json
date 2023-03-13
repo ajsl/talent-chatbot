@@ -75,6 +75,10 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "talent-chatbot:build:build",
+            "proxyConfig": "src/proxy.conf.json"    
+          },
           "configurations": {
             "production": {
               "browserTarget": "talent-chatbot:build:production"
