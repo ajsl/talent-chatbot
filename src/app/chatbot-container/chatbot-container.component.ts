@@ -47,7 +47,6 @@ export class ChatbotContainerComponent implements OnInit {
       }, 0);
     }
       this.chatForm.reset();
-      debugger;
       this.apiService.getResponse(question).subscribe(
         (response) => {
           console.log(response);
