@@ -1,12 +1,12 @@
-<div class="modal d-block bg-secondary" tabindex="-1" role="dialog" aria-label="chatbot" id="modalTour">
+<div *ngIf="isLoaded" class="modal d-block bg-secondary" tabindex="-1" role="dialog" aria-label="chatbot" id="modalTour">
     <div class="modal-dialog" role="document">
       <div class="modal-content rounded-4 shadow">
         <div class="modal-body p-3">
             <div class="modal-header">
                 <img src="../../assets/robot.svg" class="rounded float-start chatbot-icon" alt="/"/> <h1>AquentBot</h1>
             </div>
-          <ul class="gap-1 my-1 list-unstyled text-container" #scroll>
-            <app-text-bubble *ngFor="let bubble of (textBubbles ? textBubbles : [])" [bubble]=bubble></app-text-bubble>
+          <ul class="gap-1 my-1 list-unstyled text-container" #scroll id="chatContainer">
+            <app-text-bubble *ngFor="let bubble of (textBubbles ? textBubbles : [])" [bubble]=bubble [currentUser]="currentUser"></app-text-bubble>
           </ul>
           <div *ngIf="showSpinner" class="spinner-container">
               <div  class="spinner-grow" role="status">

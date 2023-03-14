@@ -14,4 +14,14 @@ export class ApiService {
     const params = new HttpParams().set('question', question);
     return this.httpClient.post(url, params, {responseType: 'text'});
   }
+
+  getMessages(userId: number): Observable<any> {
+    const url = `http://localhost:3000/api/messages/${userId}`;
+    return this.httpClient.get(url);
+  }
+
+  getUser(userId: number): Observable<any> {
+    const url = `http://localhost:3000/api/user/${userId}`;
+    return this.httpClient.get(url);
+  }
 }

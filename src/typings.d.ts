@@ -7,4 +7,11 @@ interface textBubble {
 interface user {
     id: number;
     displayName: string;
+    imageUrl: string;
+}
+
+interface messageResponse {
+    direction: string;
+    message: string;
+    date: string;
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
 
 @Component({
@@ -10,8 +11,34 @@ import { ApiService } from '../api.service';
 export class ChatbotContainerComponent implements OnInit {
 
   showSpinner = false;
+  currentUserId = 1;
+  isLoaded = false;
+  currentUser: user | undefined;
   @ViewChild('scroll', { static: true }) scroll: any;
-  constructor(private apiService: ApiService) {}
+
+  constructor(private apiService: ApiService, private route: ActivatedRoute) {
+    const routeParam = this.route.snapshot.paramMap.get('user');
+    if (routeParam) {
+      this.currentUserId = +routeParam;
+      this.apiService.getUser(this.currentUserId).subscribe(
+        (response) => {
+          console.log(response)
+          this.currentUser = {
+            displayName: response.data[0].name,
+            id: response.data[0].id,
+            imageUrl: response.data[0].image_url
+          }
+          this.isLoaded = true;
+          console.log(this.currentUser);
+        }
+      )
+    }
+    this.textBubbles.push({
+      direction: 'inbound',
+      text: "Hi, I'm AquentBot, how can I help you?" ,
+      timestamp: new Date()
+    })
+  }
 
   chatForm = new FormGroup({
     message: new FormControl('', [
@@ -25,16 +52,24 @@ export class ChatbotContainerComponent implements OnInit {
 
   ngOnInit(): void {
     // this.textBubbles = chatGenerator();
-    this.textBubbles.push({
-      direction: 'inbound',
-      text: "Hi, I'm AquentBot, how can I help you?" ,
-      timestamp: new Date()
-    })
+    this.apiService.getMessages(this.currentUserId).subscribe(
+      (response) => {
+        console.log(response);
+        response.data.forEach((message: { direction: any; message: any; date: string | number | Date; }) => {
+          this.textBubbles.push({
+            direction: message.direction,
+            text: message.message,
+            timestamp: new Date(message.date)
+          })
+        }); 
+      }
+    )
   }
 
   onSubmit() {
     console.log(this.chatForm);
     this.showSpinner = true;
+    const chatContainer = document.getElementById('chatContainer');
     const question = this.chatForm.value.message ?? "";
     if(this.chatForm.valid) {
       this.textBubbles.push({
@@ -43,7 +78,7 @@ export class ChatbotContainerComponent implements OnInit {
         timestamp: new Date()
       })
       setTimeout(() => {
-        this.scroll.nativeElement.scrollTo(0, this.scroll.nativeElement.scrollHeight);
+        chatContainer!.scrollTo(0, chatContainer!.scrollHeight);
       }, 0);
     }
       this.chatForm.reset();
@@ -56,7 +91,7 @@ export class ChatbotContainerComponent implements OnInit {
             timestamp: new Date()
           })
           setTimeout(() => {
-            this.scroll.nativeElement.scrollTo(0, this.scroll.nativeElement.scrollHeight);
+            chatContainer!.scrollTo(0, chatContainer!.scrollHeight);
           }, 0);
           this.showSpinner = false;
         },
@@ -65,8 +100,6 @@ export class ChatbotContainerComponent implements OnInit {
         }
       );
   }
-
-
 
 }
 
