@@ -82,7 +82,7 @@ export class ChatbotContainerComponent implements OnInit {
       }, 0);
     }
       this.chatForm.reset();
-      this.apiService.getResponse(question).subscribe(
+      this.apiService.getResponse(question, this.currentUserId).subscribe(
         (response) => {
           console.log(response);
           this.textBubbles.push({

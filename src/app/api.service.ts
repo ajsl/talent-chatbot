@@ -9,9 +9,12 @@ export class ApiService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getResponse(question: string): Observable<string> {
+  getResponse(question: string, user: number): Observable<string> {
     const url = "http://localhost:3000/api/benefits-answers";
-    const params = new HttpParams().set('question', question);
+    const params = new HttpParams()
+    .set('question', question)
+    .set('user', user); 
+    console.log(params);
     return this.httpClient.post(url, params, {responseType: 'text'});
   }
 
